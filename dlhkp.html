@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengaduan Online - DLHK Kabupaten Kebumen</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+
+    <!-- NAVBAR -->
+    <nav class="bg-emerald-800 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <!-- LOGO LOKAL & JUDUL -->
+                <div class="flex items-center space-x-3">
+                    <img src="logokebumen.png" alt="Logo Kebumen" class="h-10 w-auto bg-white p-0.5 rounded-lg shadow-inner">
+                    <div>
+                        <span class="block text-xs text-emerald-200">Dinas Lingkungan Hidup, Kelautan dan Perikanan</span>
+                        <span class="font-bold text-sm sm:text-base">Kabupaten Kebumen</span>
+                    </div>
+                </div>
+                <!-- MENU -->
+                <div class="hidden md:flex space-x-6 text-sm font-medium">
+                    <a href="#beranda" class="hover:text-emerald-200 transition">Beranda</a>
+                    <a href="#kategori" class="hover:text-emerald-200 transition">Pengaduan</a>
+                    <a href="#cek-status" class="hover:text-emerald-200 transition">Cek Status</a>
+                    <a href="#informasi" class="hover:text-emerald-200 transition">Informasi</a>
+                </div>
+                <!-- TOMBOL LOGIN -->
+                <div>
+                    <button onclick="openModal('loginModal')" class="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-lg text-sm font-semibold shadow transition flex items-center gap-2">
+                        <i class="fa-solid fa-right-to-bracket"></i> Login Petugas
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 1. HALAMAN UTAMA (HERO SECTION DENGAN FOTO DINAS LOKAL) -->
+    <section id="beranda" class="relative bg-emerald-950 text-white overflow-hidden py-16 px-4">
+        <!-- GAMBAR KANTOR SEBAGAI BACKGROUND LOKAL -->
+        <div class="absolute inset-0 z-0">
+            <img src="fotodinas.jpg" alt="Kantor DLHK Kebumen" class="w-full h-full object-cover opacity-25">
+            <div class="absolute inset-0 bg-emerald-950/70"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto text-center relative z-10">
+            <span class="bg-emerald-700/80 text-emerald-200 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider mb-4 inline-block">Layanan Aspirasi & Pengaduan Masyarakat</span>
+            <h1 class="text-3xl sm:text-5xl font-extrabold mb-4 tracking-tight">Pengaduan Online <br><span class="text-emerald-400">DLHK Kabupaten Kebumen</span></h1>
+            <p class="max-w-2xl mx-auto text-emerald-100 text-sm sm:text-base mb-10">Sampaikan laporan untuk lingkungan, perikanan, dan kelautan yang lebih baik.</p>
+            
+            <!-- Grid 3 Kategori Utama -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto text-left">
+                <!-- Lingkungan Hidup -->
+                <div class="bg-white text-slate-800 rounded-2xl p-6 shadow-xl border-t-4 border-emerald-600 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-xl flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-seedling"></i>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Lingkungan Hidup</h3>
+                        <p class="text-xs text-slate-600 mb-4">Sampah, limbah, pencemaran air/udara/tanah, kerusakan lingkungan.</p>
+                    </div>
+                    <button onclick="selectCategory('Lingkungan Hidup')" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white text-sm font-semibold py-2.5 rounded-xl transition text-center shadow">
+                        + Buat Pengaduan
+                    </button>
+                </div>
+
+                <!-- Perikanan -->
+                <div class="bg-white text-slate-800 rounded-2xl p-6 shadow-xl border-t-4 border-blue-600 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-blue-100 text-blue-700 rounded-xl flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-fish"></i>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Perikanan</h3>
+                        <p class="text-xs text-slate-600 mb-4">Budidaya, bantuan perikanan ilegal, dan sarana prasarana.</p>
+                    </div>
+                    <button onclick="selectCategory('Perikanan')" class="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-xl transition text-center shadow">
+                        + Buat Pengaduan
+                    </button>
+                </div>
+
+                <!-- Kelautan -->
+                <div class="bg-white text-slate-800 rounded-2xl p-6 shadow-xl border-t-4 border-cyan-600 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-cyan-100 text-cyan-700 rounded-xl flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-water"></i>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Kelautan</h3>
+                        <p class="text-xs text-slate-600 mb-4">Pesisir, abrasi, kerusakan laut, konservasi, dan lainnya.</p>
+                    </div>
+                    <button onclick="selectCategory('Kelautan')" class="w-full bg-cyan-600 hover:bg-cyan-700 text-white text-sm font-semibold py-2.5 rounded-xl transition text-center shadow">
+                        + Buat Pengaduan
+                    </button>
+                </div>
+            </div>
+
+            <!-- Value Props -->
+            <div class="mt-12 flex flex-wrap justify-center gap-8 text-xs sm:text-sm text-emerald-200">
+                <div class="flex items-center gap-2"><i class="fa-solid fa-bolt text-amber-400"></i> Mudah Akses Website</div>
+                <div class="flex items-center gap-2"><i class="fa-solid fa-magnifying-glass text-amber-400"></i> Transparan Dapat memantau status</div>
+                <div class="flex items-center gap-2"><i class="fa-solid fa-clock text-amber-400"></i> Responsif Tindak lanjut cepat</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. & 3. FORMULIR PENGADUAN INTERAKTIF -->
+    <section id="kategori" class="max-w-7xl mx-auto px-4 py-16">
+        <div class="text-center mb-10">
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">Formulir Pengaduan Online</h2>
+            <p class="text-slate-600 text-sm mt-2">Pilih kategori permasalahan sesuai dengan bidang pengaduan Anda.</p>
+            
+            <!-- Tab Kategori Switcher -->
+            <div class="flex justify-center gap-2 mt-6">
+                <button onclick="switchForm('Lingkungan Hidup')" id="tab-Lingkungan" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-emerald-700 text-white transition shadow">Lingkungan Hidup</button>
+                <button onclick="switchForm('Perikanan')" id="tab-Perikanan" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-200 text-slate-700 transition">Perikanan</button>
+                <button onclick="switchForm('Kelautan')" id="tab-Kelautan" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-200 text-slate-700 transition">Kelautan</button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Informasi Panduan Jenis Permasalahan -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 h-fit">
+                <h3 id="form-info-title" class="font-bold text-base text-emerald-800 mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-circle-info"></i> Jenis Permasalahan (Contoh)
+                </h3>
+                <ul id="form-info-list" class="text-xs text-slate-600 space-y-2 list-disc pl-4">
+                    <li>Sampah liar</li>
+                    <li>Limbah industri/rumah tangga</li>
+                    <li>Pencemaran air, udara, tanah</li>
+                    <li>Kerusakan hutan dan Ruang Terbuka Hijau (RTH)</li>
+                    <li>Kebakaran hutan/lahan</li>
+                </ul>
+            </div>
+
+            <!-- Formulir Input Utama -->
+            <div class="lg:col-span-2 bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200">
+                <h3 id="form-title" class="text-lg font-bold text-slate-800 mb-6 pb-3 border-b border-slate-100 flex items-center gap-2">
+                    <i class="fa-solid fa-file-pen text-emerald-700"></i> Form Pengaduan Lingkungan Hidup
+                </h3>
+                <form id="pengaduanForm" onsubmit="handleFormSubmit(event)" class="space-y-4 text-xs sm:text-sm">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block font-semibold text-slate-700 mb-1">Nama Pelapor *</label>
+                            <input type="text" required placeholder="Masukkan nama lengkap" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block font-semibold text-slate-700 mb-1">Lokasi Kejadian *</label>
+                            <select class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none bg-white">
+                                <option>Pilih kecamatan di Kebumen</option>
+                                <option>Kec. Kebumen</option>
+                                <option>Kec. Pejagoan</option>
+                                <option>Kec. Karangsambung</option>
+                                <option>Kec. Alian</option>
+                                <option>Kec. Kutowinangun</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block font-semibold text-slate-700 mb-1">No. HP / WhatsApp *</label>
+                            <input type="tel" required placeholder="08xxxxxxxxxx" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block font-semibold text-slate-700 mb-1">Detail Lokasi *</label>
+                            <input type="text" required placeholder="Contoh: Desa Sumberadi, Kec. Kebumen" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block font-semibold text-slate-700 mb-1">Email (Opsional)</label>
+                            <input type="email" placeholder="contoh@email.com" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block font-semibold text-slate-700 mb-1">Jenis Permasalahan *</label>
+                            <select class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none bg-white">
+                                <option>Pilih jenis permasalahan</option>
+                                <option>Sampah Liar</option>
+                                <option>Pencemaran Limbah</option>
+                                <option>Kerusakan Lingkungan</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">Kronologi Kejadian *</label>
+                        <textarea rows="4" required placeholder="Jelaskan kronologi kejadian secara jelas dan rinci..." class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">Upload Bukti (Foto/Video) *</label>
+                        <div class="border-2 border-dashed border-slate-300 rounded-xl p-6 text-center hover:bg-slate-50 cursor-pointer transition">
+                            <i class="fa-solid fa-cloud-arrow-up text-2xl text-emerald-700 mb-2"></i>
+                            <p class="text-xs text-slate-600">Klik untuk mengunggah atau drag & drop</p>
+                            <span class="text-[10px] text-slate-400">Format: JPG, JPEG, PNG, MP4 (maks. 10MB)</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <input type="checkbox" id="anonim" class="rounded text-emerald-600 focus:ring-emerald-500">
+                        <label for="anonim" class="text-slate-600 text-xs">Laporkan secara anonim (jika tersedia)</label>
+                    </div>
+
+                    <div class="flex gap-4 pt-2">
+                        <button type="submit" class="bg-emerald-700 hover:bg-emerald-800 text-white font-semibold px-6 py-2.5 rounded-lg shadow transition">Kirim Pengaduan</button>
+                        <button type="reset" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold px-6 py-2.5 rounded-lg transition">Reset</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. CEK STATUS PENGADUAN -->
+    <section id="cek-status" class="bg-emerald-900 text-white py-16 px-4">
+        <div class="max-w-4xl mx-auto bg-white text-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-10 h-10 bg-emerald-100 text-emerald-800 rounded-xl flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-magnifying-glass-chart"></i>
+                </div>
+                <div>
+                    <h2 class="text-xl font-bold">Cek Status Pengaduan</h2>
+                    <p class="text-xs text-slate-500">Masukkan nomor laporan atau nomor HP yang digunakan saat mengirim pengaduan.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Nomor Laporan / No. HP *</label>
+                        <input type="text" id="searchQuery" placeholder="Contoh: 20261017001 atau 08123456789" class="w-full px-3 py-2 border rounded-lg text-xs outline-none focus:ring-2 focus:ring-emerald-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Kode Verifikasi</label>
+                        <div class="flex gap-2 items-center">
+                            <input type="text" placeholder="Masukkan kode" class="w-1/2 px-3 py-2 border rounded-lg text-xs outline-none">
+                            <span class="bg-slate-100 font-mono font-bold tracking-widest px-4 py-2 rounded-lg text-emerald-800 text-sm border">7 8 3 2</span>
+                        </div>
+                    </div>
+                    <button onclick="checkStatus()" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-semibold py-2.5 rounded-lg text-xs transition shadow">
+                        Cek Status
+                    </button>
+                </div>
+
+                <!-- Hasil Pengecekan Mockup -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-xs space-y-3">
+                    <div class="font-bold text-emerald-800 border-b pb-2 flex justify-between items-center">
+                        <span>Contoh Hasil Pengecekan</span>
+                        <span class="bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full text-[10px]">Menunggu ACC Admin</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 text-slate-600">
+                        <div>No. Laporan:</div><div class="font-semibold text-slate-800">20261017001</div>
+                        <div>Kategori:</div><div class="font-semibold text-slate-800">Lingkungan Hidup</div>
+                        <div>Tanggal Lapor:</div><div class="font-semibold text-slate-800">17 Oktober 2026</div>
+                        <div>Lokasi:</div><div class="font-semibold text-slate-800">Desa Sumberadi, Kec. Kebumen</div>
+                        <div>Status:</div><div class="font-semibold text-amber-600">Sedang Verifikasi Admin</div>
+                        <div>Keterangan:</div><div class="font-semibold text-slate-800">Laporan Anda sedang diperiksa oleh petugas DLHKP Kebumen.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. FITUR PENDUKUNG & FOOTER -->
+    <footer id="informasi" class="bg-slate-900 text-slate-300 pt-16 pb-8 px-4">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+            <div>
+                <div class="flex items-center gap-3 mb-4">
+                    <img src="logokebumen.png" alt="Logo Kebumen" class="h-10 w-auto bg-white p-0.5 rounded">
+                    <h3 class="text-white font-bold text-base">DLHK Kab. Kebumen</h3>
+                </div>
+                <p class="text-xs text-slate-400 mb-4">Bersama Menjaga Lingkungan, Melestarikan Perikanan, dan Mewujudkan Kelautan yang Sehat.</p>
+            </div>
+            <div>
+                <h4 class="text-white font-bold text-sm mb-3">Fitur Pendukung</h4>
+                <ul class="space-y-2 text-xs text-slate-400">
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-bell text-emerald-500"></i> Notifikasi (Email/SMS/WA)</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-map-location-dot text-emerald-500"></i> Peta lokasi kejadian</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-file-pdf text-emerald-500"></i> Unduh panduan pengaduan</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-circle-question text-emerald-500"></i> FAQ Tanya Jawab</li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold text-sm mb-3">Tentang Kami</h4>
+                <ul class="space-y-2 text-xs text-slate-400">
+                    <li><a href="#" class="hover:text-white">Profil Dinas</a></li>
+                    <li><a href="#" class="hover:text-white">Visi & Misi</a></li>
+                    <li><a href="#" class="hover:text-white">Program & Kegiatan</a></li>
+                    <li><a href="#" class="hover:text-white">Kontak Resmi</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold text-sm mb-3">Kontak Cepat</h4>
+                <p class="text-xs text-slate-400 mb-2"><i class="fa-solid fa-phone text-emerald-500 mr-2"></i> (0287) 381xxx</p>
+                <p class="text-xs text-slate-400 mb-2"><i class="fa-solid fa-envelope text-emerald-500 mr-2"></i> dlhk@kebumenkab.go.id</p>
+                <p class="text-xs text-slate-400"><i class="fa-solid fa-location-dot text-emerald-500 mr-2"></i> Jl. Arungbinang No. 21 Kebumen</p>
+            </div>
+        </div>
+        <div class="border-t border-slate-800 pt-6 text-center text-xs text-slate-500">
+            &copy; 2026 Dinas Lingkungan Hidup, Kelautan dan Perikanan Kabupaten Kebumen. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- MODAL LOGIN ADMIN -->
+    <div id="loginModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 relative">
+            <button onclick="closeModal('loginModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <h3 class="font-bold text-lg mb-4 text-slate-800">Login Petugas / Admin</h3>
+            <form onsubmit="handleLogin(event)" class="space-y-3 text-xs">
+                <div>
+                    <label class="block font-semibold mb-1">Username / NIP</label>
+                    <input type="text" id="adminUser" required placeholder="Masukkan username" class="w-full px-3 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-emerald-500">
+                </div>
+                <div>
+                    <label class="block font-semibold mb-1">Password</label>
+                    <input type="password" id="adminPass" required placeholder="••••••••" class="w-full px-3 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-emerald-500">
+                </div>
+                <button type="submit" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-semibold py-2.5 rounded-lg transition mt-2">Masuk Dashboard</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- HALAMAN DASHBOARD ADMIN (MUNCUL SETELAH LOGIN) -->
+    <div id="adminDashboard" class="fixed inset-0 bg-slate-900 z-50 hidden overflow-y-auto p-6 text-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex justify-between items-center mb-8 border-b border-slate-700 pb-4">
+                <div>
+                    <h1 class="text-2xl font-bold">Dashboard Admin DLHKP Kabupaten Kebumen</h1>
+                    <p class="text-xs text-slate-400">Panel Validasi dan Penanganan Pengaduan Masyarakat</p>
+                </div>
+                <button onclick="closeAdminDashboard()" class="bg-rose-600 hover:bg-rose-700 px-4 py-2 rounded-lg text-xs font-semibold">Logout / Keluar</button>
+            </div>
+
+            <!-- Tabel Daftar Laporan Masuk -->
+            <div class="bg-slate-800 rounded-2xl p-6 shadow-xl border border-slate-700">
+                <h3 class="text-base font-bold mb-4 text-emerald-400"><i class="fa-solid fa-list-check"></i> Daftar Laporan Masuk Perlu Validasi</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs">
+                        <thead>
+                            <tr class="border-b border-slate-700 text-slate-400">
+                                <th class="pb-3">No. Laporan</th>
+                                <th class="pb-3">Pelapor</th>
+                                <th class="pb-3">Kategori</th>
+                                <th class="pb-3">Lokasi</th>
+                                <th class="pb-3">Status Saat Ini</th>
+                                <th class="pb-3 text-center">Aksi Admin (Acc / Proses)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-700">
+                            <tr>
+                                <td class="py-3 font-mono font-bold text-amber-300">20261017001</td>
+                                <td class="py-3">Julian Aji Pratama</td>
+                                <td class="py-3">Lingkungan Hidup</td>
+                                <td class="py-3">Desa Sumberadi, Kec. Kebumen</td>
+                                <td class="py-3"><span id="status-1" class="bg-amber-500/20 text-amber-300 px-2.5 py-1 rounded-full text-[10px]">Menunggu ACC</span></td>
+                                <td class="py-3 text-center space-x-2">
+                                    <button onclick="accLaporan('1', 'Disetujui / Diproses')" class="bg-emerald-600 hover:bg-emerald-700 px-3 py-1 rounded text-white font-semibold">Acc & Proses</button>
+                                    <button onclick="accLaporan('1', 'Ditolak')" class="bg-rose-600 hover:bg-rose-700 px-3 py-1 rounded text-white">Tolak</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 font-mono font-bold text-amber-300">20261017002</td>
+                                <td class="py-3">Masyarakat Pejagoan</td>
+                                <td class="py-3">Kelautan</td>
+                                <td class="py-3">Pantai Suwuk, Puring</td>
+                                <td class="py-3"><span id="status-2" class="bg-amber-500/20 text-amber-300 px-2.5 py-1 rounded-full text-[10px]">Menunggu ACC</span></td>
+                                <td class="py-3 text-center space-x-2">
+                                    <button onclick="accLaporan('2', 'Disetujui / Diproses')" class="bg-emerald-600 hover:bg-emerald-700 px-3 py-1 rounded text-white font-semibold">Acc & Proses</button>
+                                    <button onclick="accLaporan('2', 'Ditolak')" class="bg-rose-600 hover:bg-rose-700 px-3 py-1 rounded text-white">Tolak</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        const categories = {
+            'Lingkungan Hidup': {
+                title: 'Form Pengaduan Lingkungan Hidup',
+                infoTitle: 'Jenis Permasalahan (Contoh)',
+                items: ['Sampah liar', 'Limbah industri/rumah tangga', 'Pencemaran air, udara, tanah', 'Kerusakan hutan dan Ruang Terbuka Hijau (RTH)', 'Kebakaran hutan/lahan']
+            },
+            'Perikanan': {
+                title: 'Form Pengaduan Perikanan',
+                infoTitle: 'Jenis Permasalahan (Contoh)',
+                items: ['Penangkapan ikan ilegal (illegal fishing)', 'Alat tangkap merusak', 'Bantuan perikanan', 'Budidaya perikanan', 'Sarana dan prasarana perikanan']
+            },
+            'Kelautan': {
+                title: 'Form Pengaduan Kelautan',
+                infoTitle: 'Jenis Permasalahan (Contoh)',
+                items: ['Abrasi pantai', 'Kerusakan terumbu karang', 'Pencemaran laut', 'Pemanfaatan ruang laut', 'Konservasi biota laut']
+            }
+        };
+
+        function switchForm(categoryName) {
+            ['Lingkungan Hidup', 'Perikanan', 'Kelautan'].forEach(cat => {
+                const shortName = cat.split(' ')[0];
+                const btn = document.getElementById(`tab-${shortName}`);
+                if (btn) {
+                    if (cat === categoryName) {
+                        btn.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-emerald-700 text-white transition shadow";
+                    } else {
+                        btn.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-200 text-slate-700 transition";
+                    }
+                }
+            });
+
+            const data = categories[categoryName];
+            document.getElementById('form-title').innerHTML = `<i class="fa-solid fa-file-pen text-emerald-700"></i> ${data.title}`;
+            document.getElementById('form-info-title').innerHTML = `<i class="fa-solid fa-circle-info"></i> ${data.infoTitle}`;
+            
+            const listEl = document.getElementById('form-info-list');
+            listEl.innerHTML = data.items.map(item => `<li>${item}</li>`).join('');
+        }
+
+        function selectCategory(categoryName) {
+            switchForm(categoryName);
+            document.getElementById('kategori').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+            document.getElementById(id).classList.add('flex');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('flex');
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            alert('Pengaduan berhasil dikirim! Nomor Laporan Anda: 20261017001. Silakan cek status secara berkala.');
+            document.getElementById('pengaduanForm').reset();
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            closeModal('loginModal');
+            document.getElementById('adminDashboard').classList.remove('hidden');
+        }
+
+        function closeAdminDashboard() {
+            document.getElementById('adminDashboard').classList.add('hidden');
+        }
+
+        function accLaporan(id, aksi) {
+            const badge = document.getElementById(`status-${id}`);
+            if(aksi.includes('Disetujui')) {
+                badge.className = "bg-emerald-500/20 text-emerald-300 px-2.5 py-1 rounded-full text-[10px] font-bold";
+                badge.innerText = "Disetujui (Diproses ke Lapangan)";
+                alert('Laporan berhasil di-ACC! Status pelapor otomatis berubah menjadi "Dalam Proses Penanganan".');
+            } else {
+                badge.className = "bg-rose-500/20 text-rose-300 px-2.5 py-1 rounded-full text-[10px] font-bold";
+                badge.innerText = "Ditolak / Tidak Valid";
+                alert('Laporan telah ditolak.');
+            }
+        }
+
+        function checkStatus() {
+            const val = document.getElementById('searchQuery').value;
+            if(!val) {
+                alert('Silakan masukkan nomor laporan terlebih dahulu.');
+                return;
+            }
+            alert('Menemukan data laporan untuk: ' + val);
+        }
+    </script>
+</body>
+</html>
